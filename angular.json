@@ -36,9 +36,7 @@
               "projects/ng-dice-roller/tsconfig.lib.json",
               "projects/ng-dice-roller/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -67,9 +65,7 @@
               "projects/ng-dice-roller-example/src/favicon.ico",
               "projects/ng-dice-roller-example/src/assets"
             ],
-            "styles": [
-              "projects/ng-dice-roller-example/src/styles.scss"
-            ],
+            "styles": ["projects/ng-dice-roller-example/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -131,9 +127,7 @@
               "projects/ng-dice-roller-example/src/favicon.ico",
               "projects/ng-dice-roller-example/src/assets"
             ],
-            "styles": [
-              "projects/ng-dice-roller-example/src/styles.scss"
-            ],
+            "styles": ["projects/ng-dice-roller-example/src/styles.scss"],
             "scripts": []
           }
         },
@@ -145,9 +139,7 @@
               "projects/ng-dice-roller-example/tsconfig.spec.json",
               "projects/ng-dice-roller-example/e2e/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
@@ -163,6 +155,7 @@
           }
         }
       }
-    }},
-  "defaultProject": "ng-dice-roller"
+    }
+  },
+  "defaultProject": "ng-dice-roller-example"
 }

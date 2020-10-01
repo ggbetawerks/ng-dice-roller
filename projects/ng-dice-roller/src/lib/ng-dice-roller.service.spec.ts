@@ -1,9 +1,11 @@
 import { TestBed } from '@angular/core/testing';
+import { DieType } from './die-type.enum';
 
 import { NgDiceRollerService } from './ng-dice-roller.service';
 
 describe('NgDiceRollerService', () => {
   let service: NgDiceRollerService;
+  const numRolls = 100;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -12,5 +14,63 @@ describe('NgDiceRollerService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+  describe('D6', () => {
+    it('should give a number between 1-6', () => {
+      let roll = 0;
+      for (let i = 0; i < numRolls; i++) {
+        roll = service.rollDice(DieType.D6, 1);
+        expect(roll).toBeGreaterThanOrEqual(1);
+        expect(roll).toBeLessThanOrEqual(6);
+      }
+    });
+
+    it('should give a number between 2-12', () => {
+      let roll = 0;
+      for (let i = 0; i < numRolls; i++) {
+        roll = service.rollDice(DieType.D6, 2);
+        expect(roll).toBeGreaterThanOrEqual(2);
+        expect(roll).toBeLessThanOrEqual(12);
+      }
+    });
+  });
+
+  describe('D20', () => {
+    it('should give a number between 1-20', () => {
+      let roll = 0;
+      for (let i = 0; i < numRolls; i++) {
+        roll = service.rollDice(DieType.D20, 1);
+        expect(roll).toBeGreaterThanOrEqual(1);
+        expect(roll).toBeLessThanOrEqual(20);
+      }
+    });
+
+    it('should give a number between 2-40', () => {
+      let roll = 0;
+      for (let i = 0; i < numRolls; i++) {
+        roll = service.rollDice(DieType.D20, 2);
+        expect(roll).toBeGreaterThanOrEqual(2);
+        expect(roll).toBeLessThanOrEqual(40);
+      }
+    });
+  });
+
+  describe('DPercentile', () => {
+    it('should give a number between 10-100', () => {
+      let roll = 0;
+      for (let i = 0; i < numRolls; i++) {
+        roll = service.rollDice(DieType.DPercentile, 1);
+        expect(roll).toBeGreaterThanOrEqual(10);
+        expect(roll).toBeLessThanOrEqual(100);
+      }
+    });
+
+    it('should give a number that is divisible by 10', () => {
+      let roll = 0;
+      for (let i = 0; i < numRolls; i++) {
+        roll = service.rollDice(DieType.DPercentile, 1);
+        expect(roll % 10).toBe(0);
+      }
+    });
   });
 });
