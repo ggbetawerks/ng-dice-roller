@@ -35,6 +35,26 @@ describe('NgDiceRollerService', () => {
     });
   });
 
+  describe('rollD6', () => {
+    it('should give a number between 1-6', () => {
+      let roll = 0;
+      for (let i = 0; i < numRolls; i++) {
+        roll = service.rollD6(1);
+        expect(roll).toBeGreaterThanOrEqual(1);
+        expect(roll).toBeLessThanOrEqual(6);
+      }
+    });
+
+    it('should give a number between 2-12', () => {
+      let roll = 0;
+      for (let i = 0; i < numRolls; i++) {
+        roll = service.rollD6(2);
+        expect(roll).toBeGreaterThanOrEqual(2);
+        expect(roll).toBeLessThanOrEqual(12);
+      }
+    });
+  });
+
   describe('D20', () => {
     it('should give a number between 1-20', () => {
       let roll = 0;
@@ -56,12 +76,12 @@ describe('NgDiceRollerService', () => {
   });
 
   describe('DPercentile', () => {
-    it('should give a number between 10-100', () => {
+    it('should give a number between 0-90', () => {
       let roll = 0;
       for (let i = 0; i < numRolls; i++) {
         roll = service.rollDice(DieType.DPercentile, 1);
-        expect(roll).toBeGreaterThanOrEqual(10);
-        expect(roll).toBeLessThanOrEqual(100);
+        expect(roll).toBeGreaterThanOrEqual(0);
+        expect(roll).toBeLessThanOrEqual(90);
       }
     });
 
@@ -70,6 +90,26 @@ describe('NgDiceRollerService', () => {
       for (let i = 0; i < numRolls; i++) {
         roll = service.rollDice(DieType.DPercentile, 1);
         expect(roll % 10).toBe(0);
+      }
+    });
+  });
+
+  describe('D7', () => {
+    it('should give a number between 1-7', () => {
+      let roll = 0;
+      for (let i = 0; i < numRolls; i++) {
+        roll = service.roll(7, 1);
+        expect(roll).toBeGreaterThanOrEqual(1);
+        expect(roll).toBeLessThanOrEqual(7);
+      }
+    });
+
+    it('should give a number between 2-14', () => {
+      let roll = 0;
+      for (let i = 0; i < numRolls; i++) {
+        roll = service.roll(7, 2);
+        expect(roll).toBeGreaterThanOrEqual(2);
+        expect(roll).toBeLessThanOrEqual(14);
       }
     });
   });

@@ -18,7 +18,7 @@ export class NgDiceRollerService {
     let retVal = 0;
     if (numSides < 1) {
       for (let i = 0; i < numDice; i++) {
-        retVal += this.rand(10) * 10;
+        retVal += this.rand0(10) * 10;
       }
     } else {
       for (let i = 0; i < numDice; i++) {
