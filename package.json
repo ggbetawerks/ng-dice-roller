@@ -4,10 +4,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "copy:readme": "copyfiles ./README.md ./dist/ng-dice-roller",
+    "build": "npm run build:lib && npm run build:website",
+    "build:lib": "ng build ng-dice-roller && npm run copy:readme",
+    "build:website": "ng build ng-dice-roller-example --base-href='https://bartokw.github.io/ng-dice-roller/'",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "test:lib-coverage": "ng test ng-dice-roller --code-coverage --watch=false",
+    "publish:demo": "npx angular-cli-ghpages --dir=./dist/ng-dice-roller-example"
   },
   "private": true,
   "dependencies": {
@@ -27,10 +32,11 @@
     "@angular-devkit/build-angular": "~0.1001.4",
     "@angular/cli": "~10.1.3",
     "@angular/compiler-cli": "~10.1.3",
-    "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
+    "copyfiles": "^2.4.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.0.0",
