@@ -30,6 +30,7 @@ jobs:
           node-version: 12
           registry-url: https://registry.npmjs.org/
       - run: npm install -g @angular/cli
+      - run: npm install -g semantic-release-cli
       - run: npm install
       - run: npm run build
       - run: npm run publish:lib
