@@ -1,11 +1,25 @@
 {
-  "name": "ng-dice-roller",
-  "version": "0.0.1",
+  "name": "@ggbetawerks/ng-dice-roller",
+  "version": "0.0.1-dev",
+  "author": {
+    "name": "Jonathan Warrington",
+    "email": "jonw@ggsoftwerks.com"
+  },
   "peerDependencies": {
     "@angular/common": "^10.1.4",
     "@angular/core": "^10.1.4"
   },
   "dependencies": {
     "tslib": "^2.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ggbetawerks/ng-dice-roller.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ggbetawerks/ng-dice-roller/issues"
+  },
+  "homepage": "https://github.com/ggbetawerks/ng-dice-roller#readme",
+  "main": "index.js",
+  "license": "Apache-2.0"
 }

@@ -1,13 +1,15 @@
 {
-  "name": "ng-dice-roller",
+  "name": "@ggbetawerks/ng-dice-roller",
+  "description": "An Angular Dice Rolling Library",
   "version": "0.0.1-development",
+  "author": "Jonathan Warrington <jonw@ggsoftwerks.com>",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "copy:readme": "copyfiles ./README.md ./dist/ng-dice-roller",
     "build": "npm run build:lib && npm run build:website",
-    "build:lib": "ng build ng-dice-roller && npm run copy:readme",
-    "build:website": "ng build ng-dice-roller-example --base-href='https://bartokw.github.io/ng-dice-roller/'",
+    "build:lib": "ng build ng-dice-roller --prod && npm run copy:readme",
+    "build:website": "ng build ng-dice-roller-example --prod --base-href='https://ggbetawerks.github.io/ng-dice-roller/'",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "test": "ng test",
@@ -62,6 +64,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/BartokW/ng-dice-roller.git"
-  }
+    "url": "git+https://github.com/ggbetawerks/ng-dice-roller.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ggbetawerks/ng-dice-roller/issues"
+  },
+  "homepage": "https://github.com/ggbetawerks/ng-dice-roller#readme",
+  "main": "index.js",
+  "license": "Apache-2.0"
 }
