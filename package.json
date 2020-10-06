@@ -15,7 +15,7 @@
     "test": "ng test",
     "test:lib": "ng test ng-dice-roller",
     "test:lib-coverage": "ng test ng-dice-roller --code-coverage --watch=false",
-    "publish:demo": "npx angular-cli-ghpages --dir=./dist/ng-dice-roller-example",
+    "publish:demo": "npx angular-cli-ghpages --dir=./dist/ng-dice-roller-example --no-silent",
     "publish:lib": "cd dist/ng-dice-roller && npm publish",
     "adjust-version": "npm-run-all adjust-version:*",
     "adjust-version:lib": "rjp projects/ng-dice-roller/package.json version $VERSION",
