@@ -4,8 +4,9 @@
 name: Node.js Package
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - master
 
 jobs:
   build:
@@ -30,13 +31,20 @@ jobs:
           node-version: 12
           registry-url: https://registry.npmjs.org/
       - run: npm install -g @angular/cli
-      - run: npm install -g semantic-release-cli
       - run: npm install
+      #      - run: npm run adjust-version
       - run: npm run build
-      - run: npm run publish:lib
+      - run: npm run publish:demo
+        #- run: npm run publish:lib
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-          GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN }}
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: ./dist/ng-dice-roller/package.json
+          access: public
+          dry-run: true
 #  publish-gpr:
 #    needs: build
 #    runs-on: ubuntu-latest
