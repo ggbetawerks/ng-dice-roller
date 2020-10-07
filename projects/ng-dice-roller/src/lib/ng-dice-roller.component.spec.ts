@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NgDiceRollerComponent } from './ng-dice-roller.component';
+import { NgDiceRollerService } from './ng-dice-roller.service';
 
 describe('NgDiceRollerComponent', () => {
   let component: NgDiceRollerComponent;
@@ -8,9 +9,9 @@ describe('NgDiceRollerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NgDiceRollerComponent ]
-    })
-    .compileComponents();
+      declarations: [NgDiceRollerComponent],
+      providers: [NgDiceRollerService],
+    }).compileComponents();
   });
 
   beforeEach(() => {

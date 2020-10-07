@@ -1,5 +1,13 @@
+<gg-dice-roller #roller [diceArray]="diceArray"></gg-dice-roller>
+<button (click)="doSomething()">Roll All</button>
+<hr />
+<gg-die #die1 [sides]="6"></gg-die>
+<gg-die #die2 [sides]="6"></gg-die>
+<hr />
 <button (click)="rollD6()">Roll D6</button>
+<button (click)="roll2D6()">Roll 2D6</button>
 <button (click)="rollD10()">Roll D10</button>
 <button (click)="rollD7()">Roll D7</button>
+<button (click)="rollD37()">Roll D37</button>
 
 <pre>{{ results | json }}</pre>
