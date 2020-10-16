@@ -1,7 +1,7 @@
 {
   "name": "@ggbetawerks/ng-dice-roller",
   "description": "An Angular Dice Rolling Library",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Jonathan Warrington <jonw@ggsoftwerks.com>",
   "scripts": {
     "ng": "ng",

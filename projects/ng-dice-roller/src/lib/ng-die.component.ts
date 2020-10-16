@@ -8,7 +8,7 @@ import { NgDiceRollerService } from './ng-dice-roller.service';
     <img *ngIf="useImages" [src]="rollResult" />
     <p *ngIf="!useImages">
       D{{ sides == DieType.DPercentile ? 'Percentile' : sides }} =
-      {{ values.length > 0 ? rollResult : rollNumericResult }}
+      {{ values?.length > 0 ? rollResult : rollNumericResult }}
     </p>
   `,
   styles: [],
@@ -17,7 +17,6 @@ export class NgDieComponent implements OnInit {
   @Input() sides: number | DieType = 6;
   @Input() values: string[] = [];
   @Input() useImages = false;
-  // @Input() images: string[] = [];
   @Output() public ggDieResult = new EventEmitter<number | string>();
   rollResult: number | string;
   rollNumericResult: number;
@@ -35,6 +34,8 @@ export class NgDieComponent implements OnInit {
     this.rollNumericResult = this.diceRoller.roll(this.sides, 1);
     if (this.values?.length === this.sides) {
       this.rollResult = this.values[this.rollNumericResult - 1];
+    } else {
+      this.rollResult = this.rollNumericResult;
     }
     this.ggDieResult.emit(this.rollResult);
   }

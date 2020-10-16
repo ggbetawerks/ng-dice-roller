@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { DieType } from 'projects/ng-dice-roller/src/lib/die-type.enum';
 import { NgDieComponent } from 'projects/ng-dice-roller/src/lib/ng-die.component';
 import {
+  DieDefinition,
   NgDiceRollerComponent,
   NgDiceRollerService,
 } from 'projects/ng-dice-roller/src/public-api';
@@ -33,17 +34,25 @@ export class AppComponent {
     '../assets/Alea_5.png',
     '../assets/Alea_6.png',
   ];
-  @ViewChild('roller') diceComponent: NgDiceRollerComponent;
-  @ViewChild('roller2') diceComponent2: NgDiceRollerComponent;
+
   @ViewChild('die1') die1Component: NgDieComponent;
   @ViewChild('die2') die2Component: NgDieComponent;
   @ViewChild('die3') die3Component: NgDieComponent;
   @ViewChild('die4') die4Component: NgDieComponent;
 
   // diceArray = [DieType.D6, DieType.DPercentile, 7, 100];
-  diceArray = [DieType.DPercentile, DieType.D10];
+  diceArray: DieDefinition[] = [
+    { sides: DieType.DPercentile },
+    { sides: DieType.D10 },
+  ];
 
-  diceArray2 = [DieType.D6, DieType.D6];
+  diceArray2: DieDefinition[] = [{ sides: DieType.D6 }, { sides: DieType.D6 }];
+
+  diceArray3: DieDefinition[] = [
+    { values: this.labels1 },
+    { values: this.labels2 },
+    { values: this.images, useImages: true },
+  ];
 
   constructor(private diceRoller: NgDiceRollerService) {}
 
@@ -66,29 +75,21 @@ export class AppComponent {
     this.results.push(this.diceRoller.roll(37, 1));
   }
 
-  doSomething(): void {
-    // console.log(this.diceComponent);
-    if (this.diceComponent) {
-      this.diceComponent.roll();
+  rollContainer(container: NgDiceRollerComponent): void {
+    if (container) {
+      container.roll();
     }
+  }
 
-    if (this.diceComponent2) {
-      this.diceComponent2.roll();
+  rollDie(die: NgDieComponent): void {
+    if (die) {
+      die.roll();
     }
-
-    if (this.die1Component) {
-      this.die1Component.roll();
-    }
-    if (this.die2Component) {
-      this.die2Component.roll();
-    }
-
-    if (this.die3Component) {
-      this.die3Component.roll();
-    }
-
-    if (this.die4Component) {
-      this.die4Component.roll();
-    }
+  }
+  rollSingles(): void {
+    this.rollDie(this.die1Component);
+    this.rollDie(this.die2Component);
+    this.rollDie(this.die3Component);
+    this.rollDie(this.die4Component);
   }
 }

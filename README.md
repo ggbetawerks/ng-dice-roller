@@ -17,8 +17,7 @@ constructor(private roller: NgDiceRollerService){
 
 }
 
-doSomething(){
-  console.log('The result of rolling 2D6')
+rollDice(){
   // Using the Enumeration of Dice Types
   console.log(this.roller.rollDice(DieType.D6, 2));
   console.log(this.roller.rollDice(DieType.DPercentile, 1));
@@ -29,11 +28,37 @@ doSomething(){
 
 ```
 
-## Component
-A dice component, that will display the results of the rolls.
+## Components
+A pair of components that show the results of die rolls.
 
 To use add the NgDiceRollerModule to the Imports section of your module
 
+### Dice Roller
+A way to include a collection of dice that will be rolled together and display their results. 
 ```html
-<gg-dice-roller [diceArray]="[6, 7, DieType.DPercentile, DieType.D10]"></gg-dice-roller>
+  <gg-dice-roller
+  [showTotal]="false"
+  [diceArray]="[
+    { sides: 6 },
+    { sides: 7 },
+    { sides: DieType.DPercentile },
+    { sides: DieType.D10 },
+    { values: ['heads', 'tails'] },
+    {
+      values: ['../assets/Alea_3.png', '../assets/Alea_6.png'],
+      useImages: true
+    }
+  ]"
+></gg-dice-roller>
+```
+
+### Single Die
+A way to display an individual die's results.
+```html
+<gg-die [sides]="DieType.D6"></gg-die>
+<gg-die
+  [useImages]="true"
+  [values]="['../assets/Alea_3.png', '../assets/Alea_6.png']"
+></gg-die>
+<gg-die [values]="['heads', 'tails']"></gg-die>
 ```
