@@ -27,12 +27,12 @@ export class AppComponent {
     'Honeydew Melon',
   ];
   images: string[] = [
-    '../assets/Alea_1.png',
-    '../assets/Alea_2.png',
-    '../assets/Alea_3.png',
-    '../assets/Alea_4.png',
-    '../assets/Alea_5.png',
-    '../assets/Alea_6.png',
+    'assets/Alea_1.png',
+    'assets/Alea_2.png',
+    'assets/Alea_3.png',
+    'assets/Alea_4.png',
+    'assets/Alea_5.png',
+    'assets/Alea_6.png',
   ];
 
   @ViewChild('die1') die1Component: NgDieComponent;
