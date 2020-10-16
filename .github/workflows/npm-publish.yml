@@ -44,7 +44,7 @@ jobs:
           token: ${{ secrets.NPM_TOKEN }}
           package: ./dist/ng-dice-roller/package.json
           access: public
-          dry-run: true
+          dry-run: false
 #  publish-gpr:
 #    needs: build
 #    runs-on: ubuntu-latest
