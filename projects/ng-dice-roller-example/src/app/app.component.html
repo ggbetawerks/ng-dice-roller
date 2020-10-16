@@ -1,5 +1,52 @@
+<h2>Rolling 2D6</h2>
+<button (click)="rollContainer(roller2)">Roll</button>
+<gg-dice-roller #roller2 [diceArray]="diceArray2"></gg-dice-roller>
+
+<hr />
+<h2>Rolling a percentage</h2>
+<button (click)="rollContainer(roller)">Roll</button>
+<gg-dice-roller #roller [diceArray]="diceArray"></gg-dice-roller>
+
+<hr />
+<h2>Rolling text / image dice</h2>
+<button (click)="rollContainer(roller3)">Roll</button>
+<gg-dice-roller
+  #roller3
+  [diceArray]="diceArray3"
+  [showTotal]="false"
+></gg-dice-roller>
+
+<hr />
+<h2>2D6</h2>
+<button (click)="rollContainer(roller4)">Roll</button><br />
+<gg-dice-roller
+  #roller4
+  [showTotal]="false"
+  [diceArray]="[
+    {
+      values: images,
+      useImages: true
+    },
+    {
+      values: images,
+      useImages: true
+    }
+  ]"
+></gg-dice-roller>
+
+<hr />
+<h2>Rolling several different dice directly</h2>
+<button (click)="rollSingles()">Roll</button>
+<gg-die #die1 [sides]="6"></gg-die>
+<gg-die #die2 [useImages]="true" [values]="images"></gg-die>
+<gg-die #die3 [sides]="6" [values]="labels1"></gg-die>
+<gg-die #die4 [values]="labels2"></gg-die>
+<hr />
+<h2>Using the dice roller service</h2>
 <button (click)="rollD6()">Roll D6</button>
+<button (click)="roll2D6()">Roll 2D6</button>
 <button (click)="rollD10()">Roll D10</button>
 <button (click)="rollD7()">Roll D7</button>
+<button (click)="rollD37()">Roll D37</button>
 
 <pre>{{ results | json }}</pre>
