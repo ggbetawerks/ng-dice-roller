@@ -21,7 +21,7 @@ export class NgDiceRollerComponent implements OnInit {
     let t = 0;
     if (this.dieArray) {
       this.dieArray.forEach((element) => {
-        t += element.getResult();
+        t += element.getNumericResult();
       });
     }
     return t;
