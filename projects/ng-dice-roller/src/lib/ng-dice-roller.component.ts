@@ -1,11 +1,12 @@
 import { Component, Input, OnInit, ViewChildren } from '@angular/core';
+import { SafeUrl } from '@angular/platform-browser';
 import { DieType } from './die-type.enum';
 import { NgDiceRollerService } from './ng-dice-roller.service';
 import { NgDieComponent } from './ng-die.component';
 
 export interface DieDefinition {
   sides?: number | DieType;
-  values?: string[];
+  values?: (string | SafeUrl)[];
   useImages?: boolean;
 }
 @Component({

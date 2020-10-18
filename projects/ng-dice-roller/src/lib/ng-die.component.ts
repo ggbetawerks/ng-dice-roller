@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { SafeUrl } from '@angular/platform-browser';
 import { DieType } from './die-type.enum';
 import { NgDiceRollerService } from './ng-dice-roller.service';
 
@@ -15,7 +16,7 @@ import { NgDiceRollerService } from './ng-dice-roller.service';
 })
 export class NgDieComponent implements OnInit {
   @Input() sides: number | DieType = 6;
-  @Input() values: string[] = [];
+  @Input() values: (string | SafeUrl)[] = [];
   @Input() useImages = false;
   @Output() public ggDieResult = new EventEmitter<number | string>();
   rollResult: number | string;
