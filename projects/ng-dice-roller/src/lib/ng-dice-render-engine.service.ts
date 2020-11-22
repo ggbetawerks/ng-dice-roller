@@ -48,15 +48,45 @@ export class DiceRenderEngineService implements OnDestroy {
     this.light.position.z = 10;
     this.scene.add(this.light);
 
-    const geometry = new THREE.DodecahedronGeometry(1);
-    // const material = new THREE.MeshBasicMaterial({ color: 0xcccccc });
-    const material = new THREE.MeshLambertMaterial({
+    // const geometry = new THREE.DodecahedronGeometry(1);
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = new THREE.MeshBasicMaterial({ color: 0xcccccc });
+    /*const material = new THREE.MeshLambertMaterial({
       color: 0xcccccc,
       side: THREE.DoubleSide,
       opacity: 0.75,
       transparent: true,
-    });
-    const mesh = new THREE.Mesh(geometry, material);
+    });*/
+
+    const materials = [];
+
+    /* Should be able to use loadTexture from the SafeUrl (I hope)
+    strDataURI = canvas.toDataURL("image/jpeg");
+    imag = new Image();
+    imag.src = strDataURI;
+    var mesh = new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( imag.src ) } );
+    */
+    for (let i = 0; i < 6; i++) {
+      // console.log('creating sides');
+      const canvasSide = document.createElement('canvas');
+      const context = canvasSide.getContext('2d');
+      console.log(canvasSide.width);
+      const x = canvasSide.width / 2;
+      const y = canvasSide.height / 2;
+      context.font = '30pt Calibri';
+      context.textAlign = 'center';
+      context.fillStyle = 'grey';
+      context.fillRect(0, 0, canvasSide.width, canvasSide.height);
+      context.fillStyle = 'green';
+      context.fillText((i + 1).toString(), x, y);
+
+      const texture = new THREE.CanvasTexture(canvasSide);
+      // texture.needsUpdate = true;
+
+      materials.push(new THREE.MeshBasicMaterial({ map: texture }));
+    }
+    console.log(materials);
+    const mesh = new THREE.Mesh(geometry, materials);
 
     const wireframe = new THREE.LineSegments(
       new THREE.EdgesGeometry(geometry),
