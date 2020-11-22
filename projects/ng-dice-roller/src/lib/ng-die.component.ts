@@ -18,8 +18,8 @@ export class NgDieComponent implements OnInit {
   @Input() sides: number | DieType = 6;
   @Input() values: (string | SafeUrl)[] = [];
   @Input() useImages = false;
-  @Output() public ggDieResult = new EventEmitter<number | string>();
-  rollResult: number | string;
+  @Output() public ggDieResult = new EventEmitter<number | string | SafeUrl>();
+  rollResult: number | string | SafeUrl;
   rollNumericResult: number;
   DieType = DieType;
   constructor(private diceRoller: NgDiceRollerService) {}
@@ -41,7 +41,7 @@ export class NgDieComponent implements OnInit {
     this.ggDieResult.emit(this.rollResult);
   }
 
-  public getResult(): number | string {
+  public getResult(): number | string | SafeUrl {
     return this.rollResult;
   }
 
