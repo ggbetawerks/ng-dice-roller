@@ -6,6 +6,7 @@
     "email": "jonw@ggsoftwerks.com"
   },
   "peerDependencies": {
+    "three": "^0.121.1",
     "@angular/common": "^10.1.4",
     "@angular/core": "^10.1.4"
   },
