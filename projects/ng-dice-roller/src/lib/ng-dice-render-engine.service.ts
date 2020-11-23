@@ -1,5 +1,12 @@
 import * as THREE from 'three';
-import { Injectable, ElementRef, OnDestroy, NgZone } from '@angular/core';
+import {
+  Injectable,
+  ElementRef,
+  OnDestroy,
+  NgZone,
+  SecurityContext,
+} from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({ providedIn: 'root' })
 export class DiceRenderEngineService implements OnDestroy {
@@ -13,7 +20,10 @@ export class DiceRenderEngineService implements OnDestroy {
 
   private frameId: number = null;
 
-  public constructor(private ngZone: NgZone) {}
+  public constructor(
+    private ngZone: NgZone,
+    private domSanitizer: DomSanitizer
+  ) {}
 
   public ngOnDestroy(): void {
     if (this.frameId != null) {
@@ -21,7 +31,9 @@ export class DiceRenderEngineService implements OnDestroy {
     }
   }
 
-  public createScene(canvas: ElementRef<HTMLCanvasElement>): void {
+  public async createScene(
+    canvas: ElementRef<HTMLCanvasElement>
+  ): Promise<void> {
     // The first step is to get the reference of the canvas element from our HTML document
     this.canvas = canvas.nativeElement;
 
@@ -66,26 +78,71 @@ export class DiceRenderEngineService implements OnDestroy {
     imag.src = strDataURI;
     var mesh = new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( imag.src ) } );
     */
+    const tempMaterials = [];
     for (let i = 0; i < 6; i++) {
       // console.log('creating sides');
       const canvasSide = document.createElement('canvas');
       const context = canvasSide.getContext('2d');
-      console.log(canvasSide.width);
+      // console.log(canvasSide.width);
       const x = canvasSide.width / 2;
       const y = canvasSide.height / 2;
-      context.font = '30pt Calibri';
+      // console.log(x);
+      context.font = '60pt Calibri';
       context.textAlign = 'center';
       context.fillStyle = 'grey';
       context.fillRect(0, 0, canvasSide.width, canvasSide.height);
-      context.fillStyle = 'green';
-      context.fillText((i + 1).toString(), x, y);
+      context.fillStyle = 'red';
+      context.fillText((i + 1).toString(), x, y + 25);
 
       const texture = new THREE.CanvasTexture(canvasSide);
       // texture.needsUpdate = true;
 
-      materials.push(new THREE.MeshBasicMaterial({ map: texture }));
+      tempMaterials.push(new THREE.MeshBasicMaterial({ map: texture }));
     }
-    console.log(materials);
+    materials.push(tempMaterials[0]);
+    // materials.push(tempMaterials[5]);
+    // materials.push(tempMaterials[1]);
+    // materials.push(tempMaterials[4]);
+    // materials.push(tempMaterials[2]);
+    // materials.push(tempMaterials[3]);
+
+    const bb = new THREE.TextureLoader();
+    const d1 = await bb.loadAsync('assets/Alea_1.png');
+    const d2 = await bb.loadAsync('assets/Alea_2.png');
+    const d3 = await bb.loadAsync('assets/Alea_3.png');
+    const d4 = await bb.loadAsync('assets/Alea_4.png');
+    const d5 = await bb.loadAsync(
+      this.domSanitizer.sanitize(SecurityContext.URL, 'assets/Alea_5.png')
+    );
+    // const d6 = await bb.loadAsync('assets/Alea_6.png');
+
+    const s2 = this.domSanitizer.bypassSecurityTrustUrl(
+      'data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7'
+    );
+
+    // console.log(s2);
+    const d6 = await bb.loadAsync(
+      this.domSanitizer.sanitize(SecurityContext.URL, s2)
+    );
+
+    /*let nn = await bb.loadAsync(
+      'data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7'
+    );*/
+
+    const m1 = new THREE.MeshBasicMaterial({ map: d1 });
+    const m2 = new THREE.MeshBasicMaterial({ map: d2 });
+    const m3 = new THREE.MeshBasicMaterial({ map: d3 });
+    const m4 = new THREE.MeshBasicMaterial({ map: d4 });
+    const m5 = new THREE.MeshBasicMaterial({ map: d5 });
+    const m6 = new THREE.MeshBasicMaterial({ map: d6 });
+    // materials.push(m1);
+    materials.push(m6);
+    materials.push(m2);
+    materials.push(m5);
+    materials.push(m3);
+    materials.push(m4);
+
+    // console.log(materials);
     const mesh = new THREE.Mesh(geometry, materials);
 
     const wireframe = new THREE.LineSegments(

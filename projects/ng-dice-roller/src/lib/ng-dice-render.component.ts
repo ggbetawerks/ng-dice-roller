@@ -13,8 +13,8 @@ export class DiceRenderComponent implements OnInit {
 
   public constructor(private engServ: DiceRenderEngineService) {}
 
-  public ngOnInit(): void {
-    this.engServ.createScene(this.rendererCanvas);
+  public async ngOnInit(): Promise<void> {
+    await this.engServ.createScene(this.rendererCanvas);
     this.engServ.animate();
   }
 }
